@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="utf-8">
+</head>
+
+<body>
+	<form>
+		<p>
+			URLs, separated by line break, "%%u" (without the quotes) is the placeholder for the clicked URL.<br>
+			Everything before a "|" (pipe) will be used as the context menu label.
+		</p>
+		<p>
+			Example:<br>
+			<code>
+				Entry1|https://example.com?url=%%u<br>
+				Entry2|https://example.com?url=%%u
+			</code>
+		</p>
+
+		<textarea rows="10" id="config"></textarea>
+		<button type="submit">Save</button>
+	</form>
+	<script src="options.js"></script>
+</body>
+
+</html>

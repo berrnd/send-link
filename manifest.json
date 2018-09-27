@@ -1,0 +1,33 @@
+{
+	"manifest_version": 2,
+
+	"author": "Bernd Bestel",
+	"developer": {
+		"name": "Bernd Bestel",
+		"url": "https://berrnd.de"
+	},
+	"homepage_url": "https://github.com/berrnd/send-link",
+
+	"name": "send-link",
+	"description": "Send links via customizable context-menu-entries as GET requests",
+	"version": "0.1.0",
+	"applications": {
+		"gecko": {
+			"id": "{136e3622-5051-49cf-b866-9750f49aa835}"
+		}
+	},
+
+	"permissions": [
+		"contextMenus",
+		"storage"
+	],
+	"background": {
+		"scripts": [
+			"background.js"
+		]
+	},
+	"options_ui": {
+		"page": "options.html",
+		"browser_style": true
+	}
+}
