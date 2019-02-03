@@ -9,8 +9,8 @@
 	"homepage_url": "https://github.com/berrnd/send-link",
 
 	"name": "send-link",
-	"description": "Send links via customizable context-menu-entries as GET requests",
-	"version": "0.1.0",
+	"description": "Send links via customizable context-menu-entries as GET requests (MAILTO is also supported)",
+	"version": "0.2.0",
 	"applications": {
 		"gecko": {
 			"id": "{136e3622-5051-49cf-b866-9750f49aa835}"

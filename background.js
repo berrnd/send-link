@@ -53,28 +53,41 @@ SendLink.InitContextMenu = function()
 
 SendLink.ExecuteSendLink = function(link, destinationUrl)
 {
-	var xhr = new XMLHttpRequest();
 	var url = destinationUrl.replace("%%u", encodeURIComponent(link));
 
-	xhr.onreadystatechange = function()
+	if (destinationUrl.toUpperCase().startsWith("HTTP"))
 	{
-		if (xhr.readyState === XMLHttpRequest.DONE)
-		{
-			if (xhr.status === 200)
-			{
-				//TODO: Notification
-				console.log("send-link success");
-			}
-			else
-			{
-				//TODO: Notification
-				console.log("send-link error");
-			}
-		}
-	};
+		var xhr = new XMLHttpRequest();
 
-	xhr.open("GET", url, true);
-	xhr.send();
+		xhr.onreadystatechange = function()
+		{
+			if (xhr.readyState === XMLHttpRequest.DONE)
+			{
+				if (xhr.status >= 200 && xhr.status < 300)
+				{
+					//TODO: Notification
+					console.log("send-link XHR success");
+				}
+				else
+				{
+					//TODO: Notification
+					console.log("send-link XHR error");
+				}
+			}
+		};
+
+		xhr.open("GET", url, true);
+		xhr.send();
+	}
+	else if (destinationUrl.toUpperCase().startsWith("MAILTO"))
+	{
+		location.href = url;
+	}
+	else
+	{
+		//TODO: Notification
+		console.log("send-link Unsupported protocol");
+	}
 }
 
 SendLink.InitContextMenu();
