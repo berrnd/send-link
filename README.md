@@ -14,7 +14,9 @@ I often want to forward links to different, most of the time self-hosted, servic
 
 ### What it does
 
-It will add entries to the context menu of links on all websites based on the provide configuration (see the Add-on options page). Clicking such an entry will execute a `GET` request to the configured URL while replacing `%%u` with the clicked URL, if the URL starts with `http` (see below or the extension configuration page).
+It will add entries to the context menu of links on all websites based on the provide configuration (see the Add-on options page).
+
+Clicking such an entry will execute a `GET` request to the configured URL while replacing `%%u` with the clicked URL (if the URL starts with `http`).
 
 URLs starting with `mailto` will be just opened, so probably your default mail program will compose a new mail.
 
