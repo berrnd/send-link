@@ -1,25 +1,21 @@
-SendLinkOptions = { };
-
-
-SendLinkOptions.OnOptionsPageSave = function(e)
+function OnPageLoad()
 {
-	e.preventDefault();
-
-	browser.storage.sync.set({
-		config: document.querySelector("#config").value
-	});
-
-	browser.runtime.reload();
-}
-
-SendLinkOptions.OnOptionsPageLoaded = function()
-{
-	var storageItem = browser.storage.sync.get("config");
-	storageItem.then((res) =>
+	browser.storage.sync.get("config").then((res) =>
 	{
 		document.querySelector("#config").value = res.config || "";
 	});
 }
 
-document.addEventListener("DOMContentLoaded", SendLinkOptions.OnOptionsPageLoaded);
-document.querySelector("form").addEventListener("submit", SendLinkOptions.OnOptionsPageSave);
+function OnPageSave(e)
+{
+	e.preventDefault();
+
+	browser.storage.sync.set({
+		"config": document.querySelector("#config").value
+	});
+
+	browser.runtime.reload();
+}
+
+document.addEventListener("DOMContentLoaded", OnPageLoad);
+document.querySelector("form").addEventListener("submit", OnPageSave);

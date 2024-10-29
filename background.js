@@ -1,30 +1,26 @@
-SendLink = { };
-
-SendLink.InitContextMenu = function()
+function InitContextMenu()
 {
 	browser.contextMenus.create(
-	{
-		id: "send-link-parent",
-		type: "normal",
-		title: "send-link",
-		contexts: ["link"]
-	});
+		{
+			id: "send-link-parent",
+			type: "normal",
+			title: "Send Link",
+			contexts: ["link"]
+		});
 
-	var storageItem = browser.storage.sync.get("config");
-	storageItem.then((res) =>
+	browser.storage.sync.get("config").then((res) =>
 	{
-		var config = res.config || "";
-		config = config.split("\n");
+		var config = (res.config || "").split("\n");
 
 		if (config.length === 0 || (config.length === 1 && config[0].length === 0))
 		{
 			browser.contextMenus.create(
-			{
-				id: "send-link-invalid",
-				parentId: "send-link-parent",
-				type: "normal",
-				title: "Invalid or no config, please check settings"
-			});
+				{
+					id: "send-link-invalid",
+					parentId: "send-link-parent",
+					type: "normal",
+					title: "Invalid or no config, please check settings"
+				});
 		}
 		else
 		{
@@ -32,6 +28,7 @@ SendLink.InitContextMenu = function()
 			{
 				var itemTitle = item;
 				var itemLink = item;
+
 				if (item.indexOf("|") !== -1)
 				{
 					var itemParts = item.split("|");
@@ -40,18 +37,18 @@ SendLink.InitContextMenu = function()
 				}
 
 				browser.contextMenus.create(
-				{
-					parentId: "send-link-parent",
-					type: "normal",
-					title: itemTitle,
-					onclick: (e) => SendLink.ExecuteSendLink(e.linkUrl, itemLink)
-				});
+					{
+						parentId: "send-link-parent",
+						type: "normal",
+						title: itemTitle,
+						onclick: (e) => ExecuteSendLink(e.linkUrl, itemLink)
+					});
 			});
 		}
 	});
 }
 
-SendLink.ExecuteSendLink = function(link, destinationUrl)
+function ExecuteSendLink(link, destinationUrl)
 {
 	var url = destinationUrl.replace("%%u", encodeURIComponent(link));
 
@@ -65,12 +62,12 @@ SendLink.ExecuteSendLink = function(link, destinationUrl)
 			{
 				if (xhr.status >= 200 && xhr.status < 300)
 				{
-					//TODO: Notification
+					// TODO: Notification
 					console.log("send-link XHR success");
 				}
 				else
 				{
-					//TODO: Notification
+					// TODO: Notification
 					console.log("send-link XHR error");
 				}
 			}
@@ -85,9 +82,9 @@ SendLink.ExecuteSendLink = function(link, destinationUrl)
 	}
 	else
 	{
-		//TODO: Notification
+		// TODO: Notification
 		console.log("send-link Unsupported protocol");
 	}
 }
 
-SendLink.InitContextMenu();
+InitContextMenu();
