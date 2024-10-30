@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "Send Link",
 	"description": "Send links via customizable context menu entries as GET requests (mailto: is also supported).",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"author": "Bernd Bestel",
 	"homepage_url": "https://github.com/berrnd/send-link",
 	"applications": {
@@ -12,7 +12,9 @@
 	},
 	"permissions": [
 		"contextMenus",
-		"storage"
+		"storage",
+		"tabs",
+		"activeTab"
 	],
 	"background": {
 		"scripts": [

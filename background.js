@@ -62,13 +62,16 @@ function ExecuteSendLink(link, destinationUrl)
 			{
 				if (xhr.status >= 200 && xhr.status < 300)
 				{
-					// TODO: Notification
-					console.log("send-link XHR success");
+					// Success
 				}
 				else
 				{
-					// TODO: Notification
-					console.log("send-link XHR error");
+					browser.tabs.create({ url: "error.html" }).then(() =>
+					{
+						browser.tabs.executeScript({
+							"code": `document.body.innerHTML = "An error happend while executing a GET request to ${url}<br><br>Status: ${xhr.status}<br><br>Response: ${xhr.responseText}";`
+						});
+					});
 				}
 			}
 		};
@@ -82,8 +85,12 @@ function ExecuteSendLink(link, destinationUrl)
 	}
 	else
 	{
-		// TODO: Notification
-		console.log("send-link Unsupported protocol");
+		browser.tabs.create({ url: "error.html" }).then(() =>
+		{
+			browser.tabs.executeScript({
+				"code": `document.body.innerHTML = "Unsupported protocol, check your configuration<br><br> URL was: ${url}";`
+			});
+		});
 	}
 }
 
