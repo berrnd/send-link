@@ -69,7 +69,7 @@ function ExecuteSendLink(link, destinationUrl)
 					browser.tabs.create({ url: "error.html" }).then(() =>
 					{
 						browser.tabs.executeScript({
-							"code": `document.body.innerHTML = "An error happend while executing a GET request to ${url}<br><br>Status: ${xhr.status}<br><br>Response: ${xhr.responseText}";`
+							"code": `document.body.innerHTML = "An error happened while executing a GET request to ${url}<br><br>Status: ${xhr.status}<br><br>Response: ${xhr.responseText}";`
 						});
 					});
 				}
